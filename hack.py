@@ -61,6 +61,8 @@ def onPress():
   
   voiceBytes = voice['AudioStream'].read()  
   
+  print(voiceBytes)
+  
   with open('output.mp3', 'wb') as w:
     w.write(voiceBytes)
 
