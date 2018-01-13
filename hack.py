@@ -9,16 +9,15 @@ import boto3
 # wait for button press here, when it happens call onPress
 
 def onPress():
+  pygame.init()
+  pygame.mixer.init()
+  pygame.mixer.music.load('taking.mp3')
+  pygame.mixer.music.play()
   pygame.camera.init()
   cam = pygame.camera.Camera(pygame.camera.list_cameras()[0])
   cam.start()
   img = cam.get_image()
   print('Picture Taken.')
-  pygame.init()
-  pygame.mixer.init()
-  pygame.mixer.music.load('taking.mp3')
-  print('Nothing Found.')
-  pygame.mixer.music.play()
 
   pygame.image.save(img, "image.png")
   print('Picture Saved.')
@@ -81,7 +80,8 @@ def onPress():
     pygame.mixer.music.play()
 
     while pygame.mixer.music.get_busy():
-      pygame.time.Clock().tick(1)   
+      pygame.time.Clock().tick(1) 
+      
   else:
     pygame.mixer.music.load('nothing.mp3')
     print('Nothing Found.')
