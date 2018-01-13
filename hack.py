@@ -43,6 +43,8 @@ def onPress():
   
   text = ""
   
+  print(len(labels))
+  
   for label in labels:
     #print(str(label['Name']) + " " + str(label['Confidence']) + "%")
     text = text + str(label['Name']) + ", "
@@ -54,7 +56,7 @@ def onPress():
   voice = client2.synthesize_speech(
     OutputFormat='mp3',
     SampleRate='22050',
-    Text='Nothing Recognized',
+    Text=text,
     TextType='text',
     #VoiceId='Geraint'|'Gwyneth'|'Mads'|'Naja'|'Hans'|'Marlene'|'Nicole'|'Russell'|'Amy'|'Brian'|'Emma'|'Raveena'|'Ivy'|'Joanna'|'Joey'|'Justin'|'Kendra'|'Kimberly'|'Matthew'|'Salli'|'Conchita'|'Enrique'|'Miguel'|'Penelope'|'Chantal'|'Celine'|'Mathieu'|'Dora'|'Karl'|'Carla'|'Giorgio'|'Mizuki'|'Liv'|'Lotte'|'Ruben'|'Ewa'|'Jacek'|'Jan'|'Maja'|'Ricardo'|'Vitoria'|'Cristiano'|'Ines'|'Carmen'|'Maxim'|'Tatyana'|'Astrid'|'Filiz'|'Vicki'|'Takumi'|'Seoyeon'|'Aditi'
     VoiceId='Matthew'
@@ -66,7 +68,7 @@ def onPress():
   
   print(voiceBytes)
   
-  with open('nothing.mp3', 'wb') as w:
+  with open('output.mp3', 'wb') as w:
     w.write(voiceBytes)
     
   pygame.init()
