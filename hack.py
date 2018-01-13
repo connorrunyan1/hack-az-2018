@@ -20,7 +20,6 @@ def onPress():
   print('Picture Taken.')
 
   pygame.image.save(img, "image.png")
-  print('Picture Saved.')
   pygame.camera.quit()
   
   image = open("image.png", "rb")
