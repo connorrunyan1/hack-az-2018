@@ -2,6 +2,7 @@
 
 import pygame.camera
 import pygame.image
+import pygame
 import base64
 import boto3
 
@@ -65,5 +66,15 @@ def onPress():
   
   with open('output.mp3', 'wb') as w:
     w.write(voiceBytes)
+    
+  pygame.init()
+  pygame.mixer.init()
+  pygame.mixer.music.load('output.mp3')
+  pygame.mixer.music.play()
+  
+  while pygame.mixer.music.get_busy()
+    pygame.time.Clock().tick(10)
+    
+    
 
 onPress()
