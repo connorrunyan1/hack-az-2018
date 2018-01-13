@@ -46,7 +46,9 @@ def onPress():
   
   # send result to amazon polly
   
-  voice = client.synthesize_speech(
+  client2 = boto3.client('polly')
+  
+  voice = client2.synthesize_speech(
     OutputFormat='mp3',
     SampleRate='8000',
     Text=text,
