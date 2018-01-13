@@ -43,7 +43,7 @@ def onPress():
   
   for label in labels:
     print(str(label['Name']) + " " + str(label['Confidence']) + "%")
-    text = text + str(label['Name']) + " "
+    text = text + str(label['Name']) + ", "
   
   # send result to amazon polly
   
