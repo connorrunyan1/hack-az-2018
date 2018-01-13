@@ -61,6 +61,7 @@ def onPress():
   
   voiceBytes = voice['AudioStream'].read()  
   
-  File.WriteAllBytes("output.mp3", voiceBytes);
+  with open('output.mp3', 'wb') as w:
+    w.write(voiceBytes)
 
 onPress()
