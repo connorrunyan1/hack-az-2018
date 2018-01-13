@@ -34,7 +34,7 @@ def onPress():
   
   # get back result ( display as text )
   
-  print(response)
+  #print(response)
   
   labels = response['Labels']
   
