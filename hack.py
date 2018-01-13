@@ -17,15 +17,16 @@ def onPress():
 
   image = open("image.png", "rb")
   image_read = image.read()
-  image_64_encode = base64.encodestring(image_read)
+  #image_64_encode = base64.encodestring(image_read)
+  b = bytearray(image_read)
   
-  print(image_64_encode)
+  print(b)
   
   client = boto3.client('rekognition')
   
   response = client.detect_labels(
     Image = {
-      "Bytes": image_64_encode
+      "Bytes": b
     },
     MaxLabels=100,
     MinConfidence=50.0
