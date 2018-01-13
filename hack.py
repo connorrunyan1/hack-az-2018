@@ -55,7 +55,7 @@ def onPress():
     Text=text,
     TextType='text',
     #VoiceId='Geraint'|'Gwyneth'|'Mads'|'Naja'|'Hans'|'Marlene'|'Nicole'|'Russell'|'Amy'|'Brian'|'Emma'|'Raveena'|'Ivy'|'Joanna'|'Joey'|'Justin'|'Kendra'|'Kimberly'|'Matthew'|'Salli'|'Conchita'|'Enrique'|'Miguel'|'Penelope'|'Chantal'|'Celine'|'Mathieu'|'Dora'|'Karl'|'Carla'|'Giorgio'|'Mizuki'|'Liv'|'Lotte'|'Ruben'|'Ewa'|'Jacek'|'Jan'|'Maja'|'Ricardo'|'Vitoria'|'Cristiano'|'Ines'|'Carmen'|'Maxim'|'Tatyana'|'Astrid'|'Filiz'|'Vicki'|'Takumi'|'Seoyeon'|'Aditi'
-    VoiceId='Takumi'
+    VoiceId='Naja'
   )
   
   # get back speech from polly
@@ -73,7 +73,7 @@ def onPress():
   pygame.mixer.music.play()
   
   while pygame.mixer.music.get_busy():
-    pygame.time.Clock().tick(10)
+    pygame.time.Clock().tick(1)
     
     
 
