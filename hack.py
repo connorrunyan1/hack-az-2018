@@ -75,7 +75,7 @@ def onPress():
       w.write(voiceBytes)
 
     pygame.mixer.music.load('output.mp3')
-    print('Playing sound.')
+    print('Playing Audio.')
     pygame.mixer.music.play()
 
     while pygame.mixer.music.get_busy():
