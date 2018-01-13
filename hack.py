@@ -51,8 +51,8 @@ def onPress():
   
   if(len(labels) != 0):
     for label in labels:
-    #print(str(label['Name']) + " " + str(label['Confidence']) + "%")
-    text = text + str(label['Name']) + ", "
+      #print(str(label['Name']) + " " + str(label['Confidence']) + "%")
+      text = text + str(label['Name']) + ", "
   
     # send result to amazon polly
     print('Sending to AWS Polly.')
