@@ -24,12 +24,12 @@ def onPress():
   
   client = boto3.client('rekognition')
   
-  response = client.detect_labels(
+  response = client.recognize_celebrities(
     Image = {
       "Bytes": b
-    },
-    MaxLabels=100,
-    MinConfidence=50.0
+    }
+    #MaxLabels=100,
+    #MinConfidence=50.0
   )
   
   print(response)
