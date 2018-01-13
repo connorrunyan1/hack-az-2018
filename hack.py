@@ -19,6 +19,9 @@ def onPress():
   img = cam.get_image()
   print('Picture Taken.')
 
+  pygame.mixer.music.load('snap.mp3')
+  pygame.mixer.music.play()
+  
   pygame.image.save(img, "image.png")
   pygame.camera.quit()
   
