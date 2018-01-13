@@ -3,6 +3,7 @@
 import pygame.camera
 import pygame.image
 import base64
+import boto3
 
 # wait for button press here, when it happens call onPress
 
@@ -19,6 +20,17 @@ def onPress():
   image_64_encode = base64.encodestring(image_read)
   
   print(image_64_encode)
+  
+  client = boto3.client('rekognition')
+  
+  response = client.detect_labels(
+    Image = {
+      "Bytes": image_64_encode
+    },
+    MaxLabels=100,
+    MinConfidence=50.0
+  )
+  
 
 # send image to amazon recognition
 
