@@ -14,6 +14,12 @@ def onPress():
   cam.start()
   img = cam.get_image()
   print('Picture Taken.')
+  pygame.init()
+  pygame.mixer.init()
+  pygame.mixer.music.load('taking.mp3')
+  print('Nothing Found.')
+  pygame.mixer.music.play()
+
   pygame.image.save(img, "image.png")
   print('Picture Saved.')
   pygame.camera.quit()
@@ -43,41 +49,47 @@ def onPress():
   
   text = ""
   
-  print(len(labels))
-  
-  for label in labels:
+  if(len(labels) != 0):
+    for label in labels:
     #print(str(label['Name']) + " " + str(label['Confidence']) + "%")
     text = text + str(label['Name']) + ", "
   
-  # send result to amazon polly
-  print('Sending to AWS Polly.')
-  client2 = boto3.client('polly')
+    # send result to amazon polly
+    print('Sending to AWS Polly.')
+    client2 = boto3.client('polly')
+
+    voice = client2.synthesize_speech(
+      OutputFormat='mp3',
+      SampleRate='22050',
+      Text=text,
+      TextType='text',
+      #VoiceId='Geraint'|'Gwyneth'|'Mads'|'Naja'|'Hans'|'Marlene'|'Nicole'|'Russell'|'Amy'|'Brian'|'Emma'|'Raveena'|'Ivy'|'Joanna'|'Joey'|'Justin'|'Kendra'|'Kimberly'|'Matthew'|'Salli'|'Conchita'|'Enrique'|'Miguel'|'Penelope'|'Chantal'|'Celine'|'Mathieu'|'Dora'|'Karl'|'Carla'|'Giorgio'|'Mizuki'|'Liv'|'Lotte'|'Ruben'|'Ewa'|'Jacek'|'Jan'|'Maja'|'Ricardo'|'Vitoria'|'Cristiano'|'Ines'|'Carmen'|'Maxim'|'Tatyana'|'Astrid'|'Filiz'|'Vicki'|'Takumi'|'Seoyeon'|'Aditi'
+      VoiceId='Matthew'
+    )
+
+    # get back speech from polly
+
+    voiceBytes = voice['AudioStream'].read()  
+
+    #print(voiceBytes)
+
+    with open('output.mp3', 'wb') as w:
+      w.write(voiceBytes)
+
+    pygame.mixer.music.load('output.mp3')
+    print('Playing sound.')
+    pygame.mixer.music.play()
+
+    while pygame.mixer.music.get_busy():
+      pygame.time.Clock().tick(1)   
+  else:
+    pygame.mixer.music.load('nothing.mp3')
+    print('Nothing Found.')
+    pygame.mixer.music.play()
+
+    while pygame.mixer.music.get_busy():
+      pygame.time.Clock().tick(1)   
   
-  voice = client2.synthesize_speech(
-    OutputFormat='mp3',
-    SampleRate='22050',
-    Text=text,
-    TextType='text',
-    #VoiceId='Geraint'|'Gwyneth'|'Mads'|'Naja'|'Hans'|'Marlene'|'Nicole'|'Russell'|'Amy'|'Brian'|'Emma'|'Raveena'|'Ivy'|'Joanna'|'Joey'|'Justin'|'Kendra'|'Kimberly'|'Matthew'|'Salli'|'Conchita'|'Enrique'|'Miguel'|'Penelope'|'Chantal'|'Celine'|'Mathieu'|'Dora'|'Karl'|'Carla'|'Giorgio'|'Mizuki'|'Liv'|'Lotte'|'Ruben'|'Ewa'|'Jacek'|'Jan'|'Maja'|'Ricardo'|'Vitoria'|'Cristiano'|'Ines'|'Carmen'|'Maxim'|'Tatyana'|'Astrid'|'Filiz'|'Vicki'|'Takumi'|'Seoyeon'|'Aditi'
-    VoiceId='Matthew'
-  )
   
-  # get back speech from polly
-  
-  voiceBytes = voice['AudioStream'].read()  
-  
-  print(voiceBytes)
-  
-  with open('output.mp3', 'wb') as w:
-    w.write(voiceBytes)
-    
-  pygame.init()
-  pygame.mixer.init()
-  pygame.mixer.music.load('output.mp3')
-  print('Playing sound.')
-  pygame.mixer.music.play()
-  
-  while pygame.mixer.music.get_busy():
-    pygame.time.Clock().tick(1)   
 
 onPress()
