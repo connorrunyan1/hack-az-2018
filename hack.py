@@ -31,6 +31,7 @@ def onPress():
     MinConfidence=50.0
   )
   
+  print(response)
 
 # send image to amazon recognition
 
