@@ -13,16 +13,18 @@ def onPress():
   cam = pygame.camera.Camera(pygame.camera.list_cameras()[0])
   cam.start()
   img = cam.get_image()
+  print('Picture Taken.')
   pygame.image.save(img, "image.png")
+  print('Picture Saved.')
   pygame.camera.quit()
-
+  
   image = open("image.png", "rb")
   image_read = image.read()
   #image_64_encode = base64.encodestring(image_read)
   b = bytearray(image_read)
   
   # send image to amazon recognition
-  
+  print('Sending to AWS Rekognition.')
   client = boto3.client('rekognition')
   
   response = client.detect_labels(
@@ -42,11 +44,11 @@ def onPress():
   text = ""
   
   for label in labels:
-    print(str(label['Name']) + " " + str(label['Confidence']) + "%")
+    #print(str(label['Name']) + " " + str(label['Confidence']) + "%")
     text = text + str(label['Name']) + ", "
   
   # send result to amazon polly
-  
+  print('Sending to AWS Polly.')
   client2 = boto3.client('polly')
   
   voice = client2.synthesize_speech(
