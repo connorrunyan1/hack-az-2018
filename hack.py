@@ -20,19 +20,24 @@ def onPress():
   #image_64_encode = base64.encodestring(image_read)
   b = bytearray(image_read)
   
-  print(b)
-  
   client = boto3.client('rekognition')
   
-  response = client.recognize_celebrities(
+  response = client.detect_labels(
     Image = {
       "Bytes": b
-    }
-    #MaxLabels=100,
-    #MinConfidence=50.0
+    },
+    MaxLabels=100,
+    MinConfidence=80.0
   )
   
   print(response)
+  
+  labels = response['Labels']
+  
+  for label in labels:
+    print(str(label['Name']) + str(label['Confidence']))
+  
+  
 
 # send image to amazon recognition
 
