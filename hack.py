@@ -20,6 +20,8 @@ def onPress():
   #image_64_encode = base64.encodestring(image_read)
   b = bytearray(image_read)
   
+  # send image to amazon recognition
+  
   client = boto3.client('rekognition')
   
   response = client.detect_labels(
@@ -30,23 +32,33 @@ def onPress():
     MinConfidence=80.0
   )
   
+  # get back result ( display as text )
+  
   print(response)
   
   labels = response['Labels']
   
+  text = ""
+  
   for label in labels:
     print(str(label['Name']) + " " + str(label['Confidence']) + "%")
+    text = text + str(label['Name']) + " "
   
+  # send result to amazon polly
   
-
-# send image to amazon recognition
-
-# get back result ( display as text )
-
-# send result to amazon polly
-
-# get back speech from polly
-
-# send to speaker
+  voice = client.synthesize_speech(
+    OutputFormat='mp3',
+    SampleRate='8000',
+    Text=text,
+    TextType='text',
+    #VoiceId='Geraint'|'Gwyneth'|'Mads'|'Naja'|'Hans'|'Marlene'|'Nicole'|'Russell'|'Amy'|'Brian'|'Emma'|'Raveena'|'Ivy'|'Joanna'|'Joey'|'Justin'|'Kendra'|'Kimberly'|'Matthew'|'Salli'|'Conchita'|'Enrique'|'Miguel'|'Penelope'|'Chantal'|'Celine'|'Mathieu'|'Dora'|'Karl'|'Carla'|'Giorgio'|'Mizuki'|'Liv'|'Lotte'|'Ruben'|'Ewa'|'Jacek'|'Jan'|'Maja'|'Ricardo'|'Vitoria'|'Cristiano'|'Ines'|'Carmen'|'Maxim'|'Tatyana'|'Astrid'|'Filiz'|'Vicki'|'Takumi'|'Seoyeon'|'Aditi'
+    VoiceId='Russell'
+  )
+  
+  # get back speech from polly
+  
+  voiceBytes = voice['AudioStream'].read()  
+  
+  File.WriteAllBytes("output.mp3", voiceBytes);
 
 onPress()
