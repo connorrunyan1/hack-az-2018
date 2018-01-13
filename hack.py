@@ -35,7 +35,7 @@ def onPress():
   labels = response['Labels']
   
   for label in labels:
-    print(str(label['Name']) + str(label['Confidence']))
+    print(str(label['Name']) + " " + str(label['Confidence']) + "%")
   
   
 
