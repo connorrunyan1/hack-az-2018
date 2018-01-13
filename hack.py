@@ -18,7 +18,7 @@ def onPress():
   image_read = image.read()
   image_64_encode = base64.encodestring(image_read)
   
-  print image_64_encode
+  print(image_64_encode)
 
 # send image to amazon recognition
 
