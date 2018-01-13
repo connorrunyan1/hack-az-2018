@@ -2,6 +2,7 @@
 
 import pygame.camera
 import pygame.image
+import base64
 
 # wait for button press here, when it happens call onPress
 
@@ -13,9 +14,11 @@ def onPress():
   pygame.image.save(img, "image.png")
   pygame.camera.quit()
 
-
-
-
+  image = open("image.png", "rb")
+  image_read = image.read()
+  image_64_encode = base64.encodestring(image_read)
+  
+  print image_64_encode
 
 # send image to amazon recognition
 
@@ -26,3 +29,5 @@ def onPress():
 # get back speech from polly
 
 # send to speaker
+
+onPress()
